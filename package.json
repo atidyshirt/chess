@@ -1,0 +1,23 @@
+{
+  "name": "chess",
+  "version": "1.0.0",
+  "description": "A CRUD chess thingy",
+  "main": "server.js",
+  "scripts": {
+    "test": "test",
+    "start": "node server.js",
+    "debug": "node --trace-warnings %NODE_DEBUG_OPTION% server.js"
+  },
+  "author": "Jordan Pyott",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.1",
+    "chess-web-api": "^1.1.1",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "multer": "^1.4.4",
+    "promise-mysql2": "^1.0.0",
+    "rand-token": "^1.0.1"
+  }
+}
