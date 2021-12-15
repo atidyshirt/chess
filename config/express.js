@@ -30,15 +30,10 @@ module.exports = function() {
     console.log(`##### ${req.method} ${req.path} #####`);
     next();
   });
-  app.rootUrl = '/api/v1';
+  app.rootUrl = '/api';
 
   // ROUTES //
-  // require('../app/routes/backdoor.routes')(app);
-  // require('../app/routes/users.routes')(app);
-  // require('../app/routes/users.images.routes')(app);
-  // require('../app/routes/events.routes')(app);
-  // require('../app/routes/events.images.routes')(app);
-  // require('../app/routes/attendees.routes')(app);
+  require('../app/routes/users.routes')(app);
 
   return app;
 };
