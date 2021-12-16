@@ -6,7 +6,7 @@
   "scripts": {
     "test": "test",
     "start": "node server.js",
-    "debug": "node --trace-warnings %NODE_DEBUG_OPTION% server.js"
+    "debug": "node --trace-warnings server.js"
   },
   "author": "Jordan Pyott",
   "license": "ISC",
