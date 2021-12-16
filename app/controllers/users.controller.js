@@ -61,7 +61,6 @@ exports.login = async function(req, res) {
       } else if (
         (await bcrypt.compare(req.body.password, response.password)) == true
       ) {
-        console.log(token, response.id)
         await users.setToken(token, response.id);
         res.status(200).send({
           userId: response.id,
@@ -110,7 +109,6 @@ exports.register = async function(req, res) {
       last_name == undefined ||
       last_name.length < 1
     ) {
-      console.log("one");
       res.status(400).send("Error: Bad Request");
     } else {
       const post = await users.registerAccount(

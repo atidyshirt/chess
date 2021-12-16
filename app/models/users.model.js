@@ -24,7 +24,6 @@ exports.loginAccount = async function(email) {
 };
 
 exports.logoutAccount = async function(token) {
-  console.log(token);
   const update = `update user set auth_token=null where auth_token ='${token}'`;
   const conn = await db.getPool().getConnection();
   const response = await conn.query(update);
