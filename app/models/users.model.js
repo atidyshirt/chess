@@ -15,7 +15,6 @@ exports.setChessUsername = async function(token, username) {
   const conn = await db.getPool().getConnection();
   let query = `update user set chess_username='${username}' where auth_token='${token}'`;
   const result = await conn.query(query);
-  console.log(result);
   if (result[0].affectedRows == 0) {
     return 400;
   }
