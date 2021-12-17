@@ -2,6 +2,26 @@ const users = require("../models/users.model");
 const rt = require("rand-token");
 const hash = require("../passwords");
 const bcrypt = require("bcrypt");
+const chess = require("chess-web-api");
+
+exports.linkAccount = async function(req, res) {
+  try {
+    const token = req.header("X-Authorization");
+    if (token == null || token == undefined || !req.header("X-Authorization")) {
+      res.status(401).send(`ERROR: Unauthorized`);
+    }
+    const username = req.body.username;
+    const result = await users.setChessUsername(token, username);
+    if (result == 200) {
+      res.status(200).send(`SUCCESS: Chess.com Account Linked`);
+    }
+    else {
+      res.status(400).send(`ERROR: Cannot Link Account`);
+    }
+  } catch (err) {
+    res.status(500).send(`ERROR: Internal Server Error`);
+  }
+}
 
 exports.getUser = async function(req, res) {
   if (req.params.id == undefined) {

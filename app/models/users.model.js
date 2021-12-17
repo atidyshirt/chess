@@ -4,8 +4,23 @@ exports.getUserById = async function(id) {
   let query = `select first_name, last_name, email, auth_token from user where id=${id}`;
   const conn = await db.getPool().getConnection();
   const [[rows]] = await conn.query(query);
+  if (rows.count >= 1) {
+    return 400;
+  }
   conn.release();
   return rows;
+};
+
+exports.setChessUsername = async function(token, username) {
+  const conn = await db.getPool().getConnection();
+  let query = `update user set chess_username='${username}' where auth_token='${token}'`;
+  const result = await conn.query(query);
+  console.log(result);
+  if (result[0].affectedRows == 0) {
+    return 400;
+  }
+  conn.release();
+  return 200;
 };
 
 exports.loginAccount = async function(email) {
