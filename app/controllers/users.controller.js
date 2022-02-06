@@ -2,22 +2,44 @@ const users = require("../models/users.model");
 const rt = require("rand-token");
 const hash = require("../passwords");
 const bcrypt = require("bcrypt");
-const chess = require("chess-web-api");
+const chessWebAPI = require("chess-web-api");
 
 exports.linkAccount = async function(req, res) {
+  var chess = new chessWebAPI();
   try {
     const token = req.header("X-Authorization");
     if (token == null || token == undefined || !req.header("X-Authorization")) {
       res.status(401).send(`ERROR: Unauthorized`);
     }
     const username = req.body.username;
-    const result = await users.setChessUsername(token, username);
-    if (result == 200) {
+    const result = await chess.getPlayer(username);
+    if (result != undefined) {
+      await users.setChessUsername(token, username);
       res.status(200).send(`SUCCESS: Chess.com Account Linked`);
-    }
-    else {
+    } else {
       res.status(400).send(`ERROR: Cannot Link Account`);
     }
+  } catch (err) {
+    res.status(500).send(`ERROR: Internal Server Error`);
+  }
+}
+
+exports.getUserInfo = async function(req, res) {
+  var chess = new chessWebAPI();
+  try {
+    const username = req.body.username;
+    const result = await chess.getPlayer(username);
+    res.status(200).send({
+      "avatar": result.body.avatar,
+      "username": result.body.username,
+      "country": result.body.country,
+      "player_id": result.body.player_id,
+      "url": result.body.url,
+      "followers": result.body.followers,
+      "joined": result.body.joined,
+      "status": result.body.status,
+      "is_streamer": result.body.is_streamer,
+    });
   } catch (err) {
     res.status(500).send(`ERROR: Internal Server Error`);
   }
