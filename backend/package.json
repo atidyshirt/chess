@@ -19,6 +19,7 @@
     "multer": "^1.4.4",
     "promise-mysql2": "^1.0.0",
     "rand-token": "^1.0.1",
+    "run": "^1.4.0",
     "swagger-jsdoc": "^6.1.0",
     "swagger-ui-express": "^4.3.0"
   }
