@@ -9,7 +9,7 @@ exports.createPool = async function() {
     user: process.env.CHESS_MYSQL_USER,
     password: process.env.CHESS_MYSQL_PASSWORD,
     database: process.env.CHESS_MYSQL_DATABASE,
-    port: process.env.CHESS_MYSQL_PORT || 3308
+    port: process.env.CHESS_MYSQL_PORT || 3306
   });
 };
 

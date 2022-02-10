@@ -5,18 +5,39 @@
 </template>
 
 <script>
-/* import axios from 'axios' */
-/* import api from 'http://localhost:4040/api' */
+// import Api from '../api.js'
 
 export default {
-  name: 'Profile',
   data() {
       return {
-        userInfo: [],
+        firstName: "",
+        lastName: "",
+        username: "",
+        country: "",
+        profileImage: "",
+        errorMessage: "",
       }
   },
 
   methods: {
+    /* 
+    TODO: create method to store local data in a conjunctive store
+    TODO: implement a method to pull data directly from the database needed for profile 
+          (through backend API)
+    FIXME: fix the below method in order to use local storage method
+
+    basicUserInfo: async function () {
+        let response;
+        try {
+            response = await Api.userInfo(localStorage.username);
+            this.username = localStorage.username;
+            this.profileImage = response.data.image;
+            this.username = localStorage.username;
+          } catch(err) {
+          this.errorMessage = err.userFacingErrorMessage;
+        }
+      },
+      */
   }
 }
 
