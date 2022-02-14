@@ -1,5 +1,5 @@
 import axios from "axios";
-import { store } from "./state.js";
+// import { store } from "./state.js";
 const SERVER_URL = "http://localhost:4040/api/";
 
 const instance = axios.create({
@@ -75,38 +75,27 @@ export const Api = {
     });
   },
 
-  /**
-   * sends logout request checking if xauth is parsed as  a header
-   * @return promise. if it fails, the error will have the `userfacingerrormessage` property
-   */
-  logout: async () => {
-    return instance.post(`/users/logout`).catch((error) => {
-      throw ApiRequestError.createFromMessageMap(error, {
-        400: "you are not currently logged in",
-      });
-    });
-  },
-
-  /**
-   * sends registration request and creates a new account
-   * @param props object with 'first_name', 'last_name', 'email', 'password'
-   * @return promise. if it fails, the error will have the `userfacingerrormessage` property
-   */
-  register: async () => {
-    return instance.post(`/users/logout`).catch((error) => {
-      throw ApiRequestError.createFromMessageMap(error, {
-        400: "you are not currently logged in",
-      });
-    });
-  },
-
+  // TODO: fix error messages
   /**
    * sends request to chess.com api to recieve basic player info and creates profile data
    * @param props object with 'username'
    * @return promise. if it fails, the error will have the `userfacingerrormessage` property
    */
-  userInfo: async () => {
-    return instance.post(`/users/userinfo`).catch((error) => {
+  userInfo: async (props) => {
+    return instance.post(`/users/userinfo`, props).catch((error) => {
+      throw ApiRequestError.createFromMessageMap(error, {
+        400: "you are not currently logged in",
+      });
+    });
+  },
+
+  /**
+   * sends request to chess.com api to recieve player statistics and ratings
+   * @param props object with 'username'
+   * @return promise. if it fails, the error will have the `userfacingerrormessage` property
+   */
+  userStats: async (props) => {
+    return instance.post(`/users/userstats`, props).catch((error) => {
       throw ApiRequestError.createFromMessageMap(error, {
         400: "you are not currently logged in",
       });

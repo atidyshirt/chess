@@ -46,6 +46,8 @@ module.exports = function(app) {
 
   app.route(app.rootUrl + "/users/userinfo").post(users.getUserInfo);
 
+  app.route(app.rootUrl + "/users/userstats").post(users.getUserStats);
+
   /**
   *  @swagger
   *  /users/login:

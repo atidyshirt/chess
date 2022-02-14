@@ -45,6 +45,17 @@ exports.getUserInfo = async function(req, res) {
   }
 }
 
+exports.getUserStats = async function(req, res) {
+  var chess = new chessWebAPI();
+  try {
+    const username = req.body.username;
+    const result = await chess.getPlayerStats(username);
+    res.status(200).send(result);
+  } catch (err) {
+    res.status(500).send(`ERROR: Internal Server Error`);
+  }
+}
+
 exports.getUser = async function(req, res) {
   if (req.params.id == undefined) {
     res.status(404).send(`ERROR: User Not Found`);
